@@ -93,8 +93,8 @@ def translate(text,language):
 
 		translator = Translator()
 		x=translator.translate(text, dest=language)
-        op=" '{0}' \n This is how you will say {1} in {2} \n & Pronounciation is '{3}'".format(x.text,text,language,x.pronunciation)
-        return op
+        return unidecode(u" '{0}' \n This is how you will say {1} in {2} \n & Pronounciation is '{3}'".format(x.text,text,language,x.pronunciation))
+    
 
 	except Exception as e:
 		return "I didnt get destination language."
