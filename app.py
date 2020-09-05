@@ -89,15 +89,12 @@ def first_entityvalue(obj, key):
     return val
 
 def translate(text,language):
-	try:
-
-		translator = Translator()
-		x=translator.translate(text, dest=language)
-        return unidecode(u" '{0}' \n This is how you will say {1} in {2} \n & Pronounciation is '{3}'".format(x.text,text,language,x.pronunciation))
-    
-
-	except Exception as e:
-		return "I didnt get destination language."
+    try:
+        translator = Translator()
+        x=translator.translate(text, dest=language)
+        return unidecode(" '{0}' \n This is how you will say {1} in {2} \n & Pronounciation is '{3}'".format(x.text,text,language,x.pronunciation))
+    except Exception as e:
+        return "I didnt get destination language."
 def handle_message(response):
 	print(json.dumps(json.loads(json.dumps(response)),indent=2))
 	greeting=first_value(response['traits'], 'wit$greetings')
