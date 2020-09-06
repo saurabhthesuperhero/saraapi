@@ -25,7 +25,7 @@ if __name__ == '__main__':
 
 greet=['Hello, I am Sara','Hi dear ','Hi, What can I do for you ?']
 
-
+thankk=['welcome.','Its my pleasure.']
 
 
 
@@ -132,7 +132,7 @@ def handle_message(response):
     elif greeting:
 	    return random.choice(greet)
     elif thamk:
-        return random.choice('its my pleasure.','welcome.')
+        return random.choice(thankk)
     else:
 	    return "........oooooo"
 @app.route('/call=<lstring>')
