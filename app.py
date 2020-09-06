@@ -112,6 +112,7 @@ def translate(text,language):
 def handle_message(response):
     print(json.dumps(json.loads(json.dumps(response)),indent=2))
     greeting=first_value(response['traits'], 'wit$greetings')
+    thamk=first_value(response['traits'],'wit$thanks')
     typeof=first_value(response['entities'], 'type:type')
     bye=first_value(response['traits'], 'wit$bye')
     checkcap=check_intent(response['intents'],'name','capacity')
@@ -130,6 +131,8 @@ def handle_message(response):
 	    return "Bye see you later"
     elif greeting:
 	    return random.choice(greet)
+    elif thamk:
+        return random.choice('its my pleasure.','welcome.')
     else:
 	    return "........oooooo"
 @app.route('/call=<lstring>')
