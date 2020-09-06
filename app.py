@@ -126,7 +126,7 @@ def handle_message(response):
     tbody=first_value(response['entities'],'wit$phrase_to_translate:phrase_to_translate')
     tlanguage=first_value(response['entities'],'wit$message_subject:message_subject')
     if checkcap:
-        return "Hello,I can translate to any language, like:translate hello in hindi"
+        return "Hello,I can chat with you, & translate to any language, like:translate hello in tamil"
     elif checktranslate:
 	    return translate(tbody,tlanguage)
     elif typeof!=None:
