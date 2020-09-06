@@ -137,7 +137,7 @@ def handle_message(response):
     swiki=first_entityvalue(response['entities'],'wit$notable_person:notable_person')
 
     if checkcap:
-        return "Hello,I can chat with you, & translate to any language, like:translate hello in tamil"
+        return "Hello,I can chat with you, & translate to any language, like:translate hello in tamil, I can also give you information on topics."
     elif checksearch:
         if(snotable!=None):
             return searchf(snotable)
