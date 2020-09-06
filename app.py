@@ -27,7 +27,9 @@ greet=['Hello, I am Sara','Hi dear ','Hi, What can I do for you ?']
 
 thankk=['welcome.','Its my pleasure.']
 
-
+shy=['you make me shy','cause my creator is awesome']
+love=['I love eating lot','hehe , nice to hear']
+creator=['Saurabh is my creator','Saurabh is AI developer.']
 
 
 
@@ -115,6 +117,9 @@ def handle_message(response):
     thamk=first_value(response['traits'],'wit$thanks')
     typeof=first_value(response['entities'], 'type:type')
     bye=first_value(response['traits'], 'wit$bye')
+    create=first_value(response['traits'],'shy')
+    shy_=first_value(response['traits'],'creator')
+    love_=first_value(response['traits'],'love')
     checkcap=check_intent(response['intents'],'name','capacity')
     checktranslate=check_intent(response['intents'],'name','phrase_translate')
 	# print(checktranslate)
@@ -133,6 +138,12 @@ def handle_message(response):
 	    return random.choice(greet)
     elif thamk:
         return random.choice(thankk)
+    elif create:
+        return random.choice(creator)
+    elif shy_:
+        return random.choice(shy)
+    elif love_:
+        return random.choice(love)
     else:
 	    return "........oooooo"
 @app.route('/call=<lstring>')
