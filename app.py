@@ -85,6 +85,7 @@ def check_intent(obj,key,name):
 		return 0
 
 
+
 def first_value(obj, key):
     if key not in obj:
         return None
@@ -113,14 +114,16 @@ def handle_message(response):
 	greeting=first_value(response['traits'], 'wit$greetings')
 	typeof=first_value(response['entities'], 'type:type')
 	bye=first_value(response['traits'], 'wit$bye')
+    checkcap=check_intent(response['intents'],'name','capacity')
 
 # translate wala
 	checktranslate=check_intent(response['intents'],'name','phrase_translate')
 	# print(checktranslate)
 	tbody=first_value(response['entities'],'wit$phrase_to_translate:phrase_to_translate')
 	tlanguage=first_value(response['entities'],'wit$message_subject:message_subject')
-	
-	if checktranslate:
+	if checkcap:
+        return "Hello,I can translate to any language, eg:translate hello in hindi"
+	elif checktranslate:
 		return translate(tbody,tlanguage)
 	elif typeof!=None:
 		 if typeof.lower()=="movie":
