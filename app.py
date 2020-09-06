@@ -6,6 +6,7 @@ from flask import Flask,jsonify
 import os
 import logging
 from unidecode import unidecode
+import random
 
 app = Flask(__name__)
 
@@ -19,6 +20,18 @@ def hello():
 
 if __name__ == '__main__':
     app.run()
+
+
+
+greet=['Hello, I am Sara','Hi dear ','Hi, What can I do for you ?']
+
+
+
+
+
+
+
+
 
 
 def req(logger, access_token, meth, path, params, **kwargs):
@@ -92,7 +105,7 @@ def translate(text,language):
     try:
         translator = Translator()
         x=translator.translate(text, dest=language)
-        return unidecode(" '{0}'   This is how you will say {1} in {2} ".format(x.pronunciation,text,language))
+        return unidecode(" '{0}' \n This is how you will say {1} in {2}. ".format(x.pronunciation,text,language))
     except Exception as e:
         return "I didnt get destination language."
 def handle_message(response):
@@ -115,7 +128,7 @@ def handle_message(response):
 	elif bye:
 		return "Bye see you later"
 	elif greeting:
-		return "Hi ask me to translate"
+		return random.choice(greet)
 	else:
 		return "........oooooo"
 @app.route('/call=<lstring>')
