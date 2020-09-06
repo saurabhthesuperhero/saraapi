@@ -115,7 +115,7 @@ def translate(text,language):
 
 def searchf(subj):
     result = wikipedia.summary(subj, sentences = 2)
-    return result
+    return unidecode(result) 
 
 def handle_message(response):
     print(json.dumps(json.loads(json.dumps(response)),indent=2))
