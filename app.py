@@ -133,10 +133,16 @@ def handle_message(response):
     tbody=first_value(response['entities'],'wit$phrase_to_translate:phrase_to_translate')
     tlanguage=first_value(response['entities'],'wit$message_subject:message_subject')
     ssubject=first_value(response['entities'],'wit$message_subject:message_subject')
+    snotable=first_value(response['entities'],'wit$wikipedia_search_query:wikipedia_search_query')
     if checkcap:
         return "Hello,I can chat with you, & translate to any language, like:translate hello in tamil"
     elif checksearch:
-        return searchf(ssubject)
+        if(snotable!=None):
+            return searchf(snotable)
+        elif(ssubject!=None):
+            return searchf(ssubject)
+        else:
+            return "Didnt got it,will learn and tell you."
     elif checktranslate:
 	    return translate(tbody,tlanguage)
     elif typeof!=None:
