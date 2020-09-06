@@ -110,30 +110,28 @@ def translate(text,language):
     except Exception as e:
         return "I didnt get destination language."
 def handle_message(response):
-	print(json.dumps(json.loads(json.dumps(response)),indent=2))
-	greeting=first_value(response['traits'], 'wit$greetings')
-	typeof=first_value(response['entities'], 'type:type')
-	bye=first_value(response['traits'], 'wit$bye')
+    print(json.dumps(json.loads(json.dumps(response)),indent=2))
+    greeting=first_value(response['traits'], 'wit$greetings')
+    typeof=first_value(response['entities'], 'type:type')
+    bye=first_value(response['traits'], 'wit$bye')
     checkcap=check_intent(response['intents'],'name','capacity')
-
-# translate wala
-	checktranslate=check_intent(response['intents'],'name','phrase_translate')
+    checktranslate=check_intent(response['intents'],'name','phrase_translate')
 	# print(checktranslate)
-	tbody=first_value(response['entities'],'wit$phrase_to_translate:phrase_to_translate')
-	tlanguage=first_value(response['entities'],'wit$message_subject:message_subject')
-	if checkcap:
+    tbody=first_value(response['entities'],'wit$phrase_to_translate:phrase_to_translate')
+    tlanguage=first_value(response['entities'],'wit$message_subject:message_subject')
+    if checkcap:
         return "Hello,I can translate to any language, eg:translate hello in hindi"
-	elif checktranslate:
-		return translate(tbody,tlanguage)
-	elif typeof!=None:
-		 if typeof.lower()=="movie":
-		 	return "Movie you can watch"
-	elif bye:
-		return "Bye see you later"
-	elif greeting:
-		return random.choice(greet)
-	else:
-		return "........oooooo"
+    elif checktranslate:
+	    return translate(tbody,tlanguage)
+    elif typeof!=None:
+	    if typeof.lower()=="movie":
+		    return "Movie you can watch"
+    elif bye:
+	    return "Bye see you later"
+    elif greeting:
+	    return random.choice(greet)
+    else:
+	    return "........oooooo"
 @app.route('/call=<lstring>')
 def mainapp(lstring):
 	data=[]
