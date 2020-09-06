@@ -7,6 +7,7 @@ import os
 import logging
 from unidecode import unidecode
 import random
+import wikipedia
 
 app = Flask(__name__)
 
@@ -111,6 +112,11 @@ def translate(text,language):
         return unidecode(" '{0}'  This is how you will say {1} in {2}. ".format(x.pronunciation,text,language))
     except Exception as e:
         return "I didnt get destination language."
+
+def searchf(subj):
+    result = wikipedia.summary(subj, sentences = 2)
+    return result
+
 def handle_message(response):
     print(json.dumps(json.loads(json.dumps(response)),indent=2))
     greeting=first_value(response['traits'], 'wit$greetings')
@@ -122,11 +128,15 @@ def handle_message(response):
     love_=first_value(response['traits'],'love')
     checkcap=check_intent(response['intents'],'name','capacity')
     checktranslate=check_intent(response['intents'],'name','phrase_translate')
+    checksearch=check_intent(response['intents'],'name','question')
 	# print(checktranslate)
     tbody=first_value(response['entities'],'wit$phrase_to_translate:phrase_to_translate')
     tlanguage=first_value(response['entities'],'wit$message_subject:message_subject')
+    ssubject=first_value(response['entities'],'wit$message_subject:message_subject')
     if checkcap:
         return "Hello,I can chat with you, & translate to any language, like:translate hello in tamil"
+    elif checksearch:
+        return searchf(ssubject)
     elif checktranslate:
 	    return translate(tbody,tlanguage)
     elif typeof!=None:
