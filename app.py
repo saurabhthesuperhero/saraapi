@@ -34,45 +34,6 @@ creator = ['Saurabh is my creator', 'Saurabh is AI developer.']
 def Index():
     return "Hello I am Sara!"
 
-#Networking
-def req(logger, access_token, meth, path, params, **kwargs):
-    full_url = WIT_API_HOST + path
-    logger.debug('%s %s %s', meth, full_url, params)
-    headers = {
-        'authorization': 'Bearer ' + access_token,
-        'accept': 'application/vnd.wit.' + WIT_API_VERSION + '+json'
-    }
-    headers.update(kwargs.pop('headers', {}))
-    rsp = requests.request(
-        meth,
-        full_url,
-        headers=headers,
-        params=params,
-        **kwargs
-    )
-    if rsp.status_code > 200:
-        return "400"
-    json = rsp.json()
-    if 'error' in json:
-        return "400"
-
-    logger.debug('%s %s %s', meth, full_url, json)
-    return json
-
-def message(msg, context=None, n=None, verbose=None):
-    params = {}
-    logger = logging.getLogger()
-    if n is not None:
-        params['n'] = n
-    if msg:
-        params['q'] = msg
-    if context:
-        params['context'] = json.dumps(context)
-    if verbose:
-        params['verbose'] = verbose
-    resp = req(logger, access_token, 'GET', '/message', params)
-    return resp
-
 
 
 def check_intent(obj, key, name):
@@ -174,7 +135,5 @@ def handle_message(response):
 def mainapp(lstring):
     data = []
     params = lstring
-    logger = logging.getLogger()
-    resp = req(logger, access_token, 'GET', '/message', params)
-    data.append({"message": handle_message(message(params))})
+    data.append({"message": handle_message(client.message(params))})
     return jsonify(data=data, status=200)
