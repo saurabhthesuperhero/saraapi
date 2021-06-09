@@ -82,54 +82,57 @@ def searchf(subj):
 
 
 def handle_message(response):
-    print(json.dumps(json.loads(json.dumps(response)), indent=2))
-    greeting = first_value(response['traits'], 'wit$greetings')
-    thamk = first_value(response['traits'], 'wit$thanks')
-    typeof = first_value(response['entities'], 'type:type')
-    bye = first_value(response['traits'], 'wit$bye')
-    create = first_value(response['traits'], 'shy')
-    shy_ = first_value(response['traits'], 'creator')
-    love_ = first_value(response['traits'], 'love')
-    checkcap = check_intent(response['intents'], 'name', 'capacity')
-    checktranslate = check_intent(response['intents'], 'name', 'phrase_translate')
-    checksearch = check_intent(response['intents'], 'name', 'question')
-    # print(checktranslate)
-    tbody = first_value(response['entities'], 'wit$phrase_to_translate:phrase_to_translate')
-    tlanguage = first_value(response['entities'], 'wit$message_subject:message_subject')
-    ssubject = first_value(response['entities'], 'wit$message_subject:message_subject')
-    snotable = first_value(response['entities'], 'wit$wikipedia_search_query:wikipedia_search_query')
-    swiki = first_entityvalue(response['entities'], 'wit$notable_person:notable_person')
+    try:
+        print(json.dumps(json.loads(json.dumps(response)), indent=2))
+        greeting = first_value(response['traits'], 'wit$greetings')
+        thamk = first_value(response['traits'], 'wit$thanks')
+        typeof = first_value(response['entities'], 'type:type')
+        bye = first_value(response['traits'], 'wit$bye')
+        create = first_value(response['traits'], 'shy')
+        shy_ = first_value(response['traits'], 'creator')
+        love_ = first_value(response['traits'], 'love')
+        checkcap = check_intent(response['intents'], 'name', 'capacity')
+        checktranslate = check_intent(response['intents'], 'name', 'phrase_translate')
+        checksearch = check_intent(response['intents'], 'name', 'question')
+        # print(checktranslate)
+        tbody = first_value(response['entities'], 'wit$phrase_to_translate:phrase_to_translate')
+        tlanguage = first_value(response['entities'], 'wit$message_subject:message_subject')
+        ssubject = first_value(response['entities'], 'wit$message_subject:message_subject')
+        snotable = first_value(response['entities'], 'wit$wikipedia_search_query:wikipedia_search_query')
+        swiki = first_entityvalue(response['entities'], 'wit$notable_person:notable_person')
 
-    if checkcap:
-        return "Hello,I can chat with you, & translate to any language, like:translate hello in tamil, I can also give you information on topics."
-    elif checksearch:
-        if (snotable != None):
-            return searchf(snotable)
-        elif (ssubject != None):
-            return searchf(ssubject)
-        elif (swiki != None):
-            return searchf(swiki)
+        if checkcap:
+            return "Hello,I can chat with you, & translate to any language, like:translate hello in tamil, I can also give you information on topics."
+        elif checksearch:
+            if (snotable != None):
+                return searchf(snotable)
+            elif (ssubject != None):
+                return searchf(ssubject)
+            elif (swiki != None):
+                return searchf(swiki)
+            else:
+                return "Didnt got it,will learn and tell you."
+        elif checktranslate:
+            return translate(tbody, tlanguage)
+        elif typeof != None:
+            if typeof.lower() == "movie":
+                return "Movie you can watch"
+        elif bye:
+            return "Bye see you later"
+        elif greeting:
+            return random.choice(greet)
+        elif thamk:
+            return random.choice(thankk)
+        elif create:
+            return random.choice(creator)
+        elif shy_:
+            return random.choice(shy)
+        elif love_:
+            return random.choice(love)
         else:
-            return "Didnt got it,will learn and tell you."
-    elif checktranslate:
-        return translate(tbody, tlanguage)
-    elif typeof != None:
-        if typeof.lower() == "movie":
-            return "Movie you can watch"
-    elif bye:
-        return "Bye see you later"
-    elif greeting:
-        return random.choice(greet)
-    elif thamk:
-        return random.choice(thankk)
-    elif create:
-        return random.choice(creator)
-    elif shy_:
-        return random.choice(shy)
-    elif love_:
-        return random.choice(love)
-    else:
-        return "........oooooo"
+            return "........oooooo"
+    except Exception as e:
+        return "Soryy Im learning dear, will be awesome soon"            
 
 @app.route('/call=<lstring>')
 def mainapp(lstring):
