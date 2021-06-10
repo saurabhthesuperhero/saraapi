@@ -8,7 +8,13 @@ import logging
 from unidecode import unidecode
 import random
 import wikipedia
+# Load data preprocessing libs
+import pandas as pd
+import numpy as np
 
+# Load vectorizer and similarity measure
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 #Initializations
 
 app=Flask(__name__)
@@ -133,11 +139,38 @@ def handle_message(response):
         else:
             return "........oooooo"
     except Exception as e:
-        return "Soryy Im learning dear, will be awesome soon"            
+        return "Soryy Im learning dear, will be awesome soon"
+
+
+
+
+
+
+# @app.route('/call=<lstring>')
+# def mainapp(lstring):
+#     data = []
+#     params = lstring
+#     data.append({"message": handle_message(client.message(params))})
+#     return jsonify(data=data, status=200)
 
 @app.route('/call=<lstring>')
 def mainapp(lstring):
-    data = []
-    params = lstring
-    data.append({"message": handle_message(client.message(params))})
-    return jsonify(data=data, status=200)
+    data=[]
+    df = pd.read_csv("DFs1.csv")
+    df.dropna(inplace=True)
+    vectorizer = TfidfVectorizer()
+    vectorizer.fit(np.concatenate((df.p1, df.p2)))
+    Question_vectors = vectorizer.transform(df.p1)    
+    # Locate the closest question
+    input_question_vector = vectorizer.transform([lstring])
+
+    # Compute similarities
+    similarities = cosine_similarity(input_question_vector, Question_vectors)
+
+    # Find the closest question
+    closest = np.argmax(similarities, axis=1)
+
+    # Print the correct answer
+    message=(df.p2.iloc[closest].values[0])
+    data.append({"message": message})
+    return jsonify(data=data, status=200)    
