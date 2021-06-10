@@ -1,3 +1,6 @@
+pandas
+numpy
+sklearn
 requests==2.22.0
 Flask==1.1.2
 wit==6.0.0
