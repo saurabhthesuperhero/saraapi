@@ -156,7 +156,7 @@ def handle_message(response):
 @app.route('/call=<lstring>')
 def mainapp(lstring):
     data=[]
-    df = pd.read_csv("DFs1.csv")
+    df = pd.read_csv("DFs1s2.csv")
     df.dropna(inplace=True)
     vectorizer = TfidfVectorizer()
     vectorizer.fit(np.concatenate((df.p1, df.p2)))
