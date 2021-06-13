@@ -154,7 +154,7 @@ def mainapp(lstring):
     return jsonify(data=data, status=200)
 
 @app.route('/call2=<lstring>')
-def mainapp(lstring):
+def mainapp2(lstring):
     data=[]
     df = pd.read_csv("DFs1s2.csv")
     df.dropna(inplace=True)
