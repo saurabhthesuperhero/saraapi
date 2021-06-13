@@ -146,14 +146,14 @@ def handle_message(response):
 
 
 
-# @app.route('/call=<lstring>')
-# def mainapp(lstring):
-#     data = []
-#     params = lstring
-#     data.append({"message": handle_message(client.message(params))})
-#     return jsonify(data=data, status=200)
-
 @app.route('/call=<lstring>')
+def mainapp(lstring):
+    data = []
+    params = lstring
+    data.append({"message": handle_message(client.message(params))})
+    return jsonify(data=data, status=200)
+
+@app.route('/call2=<lstring>')
 def mainapp(lstring):
     data=[]
     df = pd.read_csv("DFs1s2.csv")
