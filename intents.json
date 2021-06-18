@@ -1,0 +1,83 @@
+{
+    "intents": [
+      {
+        "tag": "Hello",
+        "patterns": [
+          "Hi",
+          "Hey",
+          "Is anyone there?",
+          "Hello","Hiii","Hiiiiiii"
+        ],
+        "responses": [
+          "Hey :-)",
+          "Hi there, what can I do for you?",
+          "Hi, Say"
+        ]
+      },
+      {
+        "tag": "goodbye",
+        "patterns": ["Bye", "See you later", "Goodbye","Bye Bye"],
+        "responses": [
+          "See you later, take care",
+          "Have a nice day",
+          "Bye! meet you soon",
+          "Bye, Dear!"
+        ]
+      },
+
+      {
+        "tag": "how",
+        "patterns": ["How are you","Im fine"],
+        "responses": ["Great", "Good"]
+      },
+
+      {
+        "tag": "thanks",
+        "patterns": ["Thanks", "Thank you", "That's helpful", "Thank's a lot!"],
+        "responses": ["Happy to help!", "Any time!, Dear", "My pleasure","Welcome, Dear"]
+      },
+      {
+        "tag": "love",
+        "patterns": ["I love you", "Love you","Do you love me","You are hot"],
+        "responses": ["Thankx, But I love my creator.","Thanx I m so happy now."]
+      },
+      {
+        "tag": "creator",
+        "patterns": ["Who is your creator", "who is saurabh"],
+        "responses": ["Saurabh is my creator", "Saurabh made me with his love"]
+      },
+      {
+        "tag": "who",
+        "patterns": ["who are you", "what are you", "Are you bot ?","Are you human ?"],
+        "responses": ["I'am Sara, your assitant!","I am your assistant, Sara!"]
+      },
+      {
+        "tag": "name",
+        "patterns": ["what is your name?","tell me your name"],
+        "responses": ["I am Sara!"]
+      },
+      
+    
+     
+      {
+        "tag": "funny",
+        "patterns": [
+          "Tell me a joke!",
+          "Tell me something funny!",
+          "Do you know a joke?"
+        ],
+        "responses": [
+          " I used to have a handle on life, but then it broke.",
+          "Don’t you hate it when someone answers their own questions? I do.",
+          "Never trust atoms; they make up everything.",
+          " I’m reading a book about anti-gravity. It’s impossible to put down.",
+          "‘Doctor, there’s a patient on line one that says he’s invisible. ‘Well, tell him I can’t see him right now.’",
+          "A recent study has found that women who carry a little extra weight live longer than the men who mention it.",
+          "Adam & Eve were the first ones to ignore the Apple terms and conditions.",
+          "Refusing to go to the gym is a form of resistance training.",
+          " My friend’s bakery burned down last night. Now his business is toast."
+        ]
+      }
+    ] 
+  }
+  
