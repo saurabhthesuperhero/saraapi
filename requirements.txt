@@ -5,6 +5,7 @@ sklearn
 requests==2.22.0
 Flask==1.1.2
 wit==6.0.0
+nltk
 Unidecode==1.1.1
 gunicorn
 wikipedia==1.4.0
