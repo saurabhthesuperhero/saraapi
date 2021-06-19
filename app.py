@@ -139,7 +139,7 @@ def searchf(params,subj):
         return unidecode(result)
     except wikipedia.exceptions.DisambiguationError as e :
         print(e)
-        return "Dear looks like many topics please be specific : "+str(e)
+        return unidecode("Dear looks like many topics please be specific : "+str(e))
     else:
         return deepChat(params)    
 
