@@ -13,6 +13,9 @@ import pandas as pd
 import numpy as np
 import random
 import json
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning, module='bs4')
+warnings.filterwarnings("ignore", category=UserWarning, module='wikipedia')
 
 import torch
 
@@ -85,7 +88,31 @@ def first_value(obj, key):
         return None
     return val
 
+def deepChat(sentence):
+    sentence = tokenize(sentence)
+    X = bag_of_words(sentence, all_words)
+    X = X.reshape(1, X.shape[0])
+    X = torch.from_numpy(X).to(device)
 
+    output = model(X)
+    _, predicted = torch.max(output, dim=1)
+
+    tag = tags[predicted.item()]
+
+    probs = torch.softmax(output, dim=1)
+    data=[]
+    prob = probs[0][predicted.item()]
+    if prob.item() > 0.75:
+        for intent in intents['intents']:
+            if tag == intent["tag"]:
+                message= random.choice(intent['responses'])
+                return message
+
+    else:
+        message="Soryy Im learning dear, will be awesome soon"
+        return message
+
+        
 def first_entityvalue(obj, key):
     if key not in obj:
         return None
@@ -110,9 +137,11 @@ def searchf(params,subj):
     try:
         result = wikipedia.summary(subj, sentences=2)
         return unidecode(result)
-    except:
-        return deepChat(params)
-
+    except wikipedia.exceptions.DisambiguationError as e :
+        print(e)
+        return "Dear looks like many topics please be specific : "+str(e)
+    else:
+        return deepChat(params)    
 
 def handle_message(params):
     try:
@@ -150,31 +179,9 @@ def handle_message(params):
         else:
             return deepChat(params)
     except Exception as e:
-        return "Soryy Im learning dear, will be awesome soon"
+        return deepChat(params)
 
-def deepChat(sentence):
-    sentence = tokenize(sentence)
-    X = bag_of_words(sentence, all_words)
-    X = X.reshape(1, X.shape[0])
-    X = torch.from_numpy(X).to(device)
 
-    output = model(X)
-    _, predicted = torch.max(output, dim=1)
-
-    tag = tags[predicted.item()]
-
-    probs = torch.softmax(output, dim=1)
-    data=[]
-    prob = probs[0][predicted.item()]
-    if prob.item() > 0.75:
-        for intent in intents['intents']:
-            if tag == intent["tag"]:
-                message= random.choice(intent['responses'])
-                return message
-
-    else:
-        message="Soryy Im learning dear, will be awesome soon"
-        return message
 
 @app.route('/call=<lstring>')
 def mainapp(lstring):
