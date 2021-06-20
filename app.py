@@ -89,6 +89,7 @@ def first_value(obj, key):
     return val
 
 def deepChat(sentence):
+    print("Im in deepchat")
     sentence = tokenize(sentence)
     X = bag_of_words(sentence, all_words)
     X = X.reshape(1, X.shape[0])

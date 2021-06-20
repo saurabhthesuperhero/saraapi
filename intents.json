@@ -29,11 +29,7 @@
       "responses": ["Can't Understand Your Question","please elaborate your question"]
      },
 
-    {
-      "tag": "how",
-      "patterns": ["How are you","Im fine"],
-      "responses": ["Great", "Good"]
-    },
+  
     {
       "tag": "morning",
       "patterns": ["Good morning","morning"],
@@ -98,8 +94,8 @@
       "responses": ["I'am Sara, your assitant!","I am your assistant, Sara!"]
     },
     {"tag": "about",
-      "patterns": ["how you doing?","how are you"],
-      "responses": ["Thanks For Asking!How can I help you?"]
+      "patterns": ["how you doing?","how are you","How are you Sara"],
+      "responses": ["Thanks For Asking!How can I help you?","Im fine, you say"]
      },
     {
       "tag": "name",
