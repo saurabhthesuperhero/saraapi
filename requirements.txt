@@ -4,7 +4,7 @@ numpy
 sklearn
 scikit-learn
 requests==2.22.0
-Flask==1.1.2
+Flask==2.1.0
 wit==6.0.0
 nltk
 Unidecode==1.1.1
