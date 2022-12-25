@@ -2,6 +2,7 @@
 pandas
 numpy
 sklearn
+scikit-learn
 requests==2.22.0
 Flask==1.1.2
 wit==6.0.0
@@ -10,5 +11,6 @@ Unidecode==1.1.1
 gunicorn
 wikipedia==1.4.0
 googletrans==4.0.0-rc1
-torch==1.8.1+cpu  -f https://download.pytorch.org/whl/torch_stable.html
-torchvision==0.9.1+cpu -f https://download.pytorch.org/whl/torch_stable.html
+torch
+torchvision
+itsdangerous==2.0.1
