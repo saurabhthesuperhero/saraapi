@@ -129,7 +129,10 @@ def translate(text, language):
         translator = Translator()
         logging.debug(text+language)
         x = translator.translate(text, dest=language)
-        return unidecode(" '{0}'  This is how you will say {1} in {2}. ".format(x.pronunciation, text, language))
+        translation = x.pronunciation
+        if translation == None:
+            translation = x.text
+        return unidecode(" '{0}'  This is how you will say {1} in {2}. ".format(translation, text, language))
     except Exception as e:
         print(e)
         return "I didnt get destination language."
